@@ -122,7 +122,3 @@ BFS uses a queue to keep track of the nodes to be explored next, ensuring that n
 
 ### **Conclusion**
 Graphs are powerful data structures used to model a wide variety of real-world problems. Understanding graph traversal techniques like DFS and BFS is fundamental for solving complex problems in networking, pathfinding, scheduling, and more. Depending on the nature of the graph (sparse vs. dense, directed vs. undirected), different implementations and algorithms can be chosen for efficiency.
-
----
-
-Would you like to explore more advanced graph algorithms, or is there another topic you'd like to cover?
