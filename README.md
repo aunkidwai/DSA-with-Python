@@ -4,4 +4,5 @@
 
 ### Complexity Analysis
 
-![image](https://github.com/user-attachments/assets/10fd0ab3-c6eb-45b8-8712-fdd1055cd0bf)
+![image](https://github.com/user-attachments/assets/8f252ef4-851c-4ae5-99ae-0cf4847c95b8)
+
