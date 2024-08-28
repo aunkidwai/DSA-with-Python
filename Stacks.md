@@ -1,20 +1,14 @@
 ### **Stacks in Python**
 
-A stack is a linear data structure that follows the Last In, First Out (LIFO) principle. This means that the last element added to the stack will be the first one to be removed. Stacks are used in various scenarios like undo mechanisms in text editors, parsing expressions, backtracking algorithms, and more.
+#### **Description**
+A stack is a linear data structure that follows the Last In, First Out (LIFO) principle. This means that the last element added to the stack will be the first one to be removed. Stacks are used in various applications, such as expression evaluation, backtracking algorithms, and managing function calls in programming languages.
 
-#### **1. Stack Implementation in Python**
+Python’s list data structure provides a simple way to implement a stack, where the list’s `append()` and `pop()` methods can be used for the stack operations.
 
-Python does not have a built-in stack data structure, but you can implement a stack using:
-- **Lists**: Simple and straightforward to use, but with some performance considerations.
-- **Collections.deque**: A more efficient way of implementing a stack, especially for large data sets.
+#### **Basic Stack Operations**
 
-##### **a. Using Lists**
-
-A list in Python can be used as a stack with the following operations:
-- `append(element)`: To push an element onto the stack.
-- `pop()`: To remove the top element from the stack.
-
-**Example:**
+##### **Push (Add) Element**
+The `push` operation adds an element to the top of the stack. In Python, this can be done using the `append()` method on a list.
 
 ```python
 stack = []
@@ -24,119 +18,96 @@ stack.append(1)
 stack.append(2)
 stack.append(3)
 
-# Pop elements from the stack
-top_element = stack.pop()  # 3
+print(stack)  # Output: [1, 2, 3]
 ```
 
-**Advantages:**
-- Simple and easy to use.
-- Suitable for small to moderate-sized stacks.
-
-**Disadvantages:**
-- Lists can have performance issues when used as a stack, especially for large stacks, because of the overhead of dynamic resizing.
-
-##### **b. Using `collections.deque`**
-
-`collections.deque` is a double-ended queue designed for fast appends and pops from both ends.
-
-**Example:**
+##### **Pop (Remove) Element**
+The `pop` operation removes the top element from the stack (the last element that was added). This is done using the `pop()` method in Python.
 
 ```python
-from collections import deque
+# Pop the top element from the stack
+top_element = stack.pop()
 
-stack = deque()
-
-# Push elements onto the stack
-stack.append(1)
-stack.append(2)
-stack.append(3)
-
-# Pop elements from the stack
-top_element = stack.pop()  # 3
+print(top_element)  # Output: 3
+print(stack)        # Output: [1, 2]
 ```
 
-**Advantages:**
-- More efficient than lists for implementing stacks, especially for large stacks.
-- Constant time complexity for append and pop operations (O(1)).
-
-**Disadvantages:**
-- Requires importing the `collections` module.
-
-#### **2. Stack Operations**
-
-Let's look at the basic operations of a stack.
-
-##### **a. Push Operation**
-The `push()` operation adds an element to the top of the stack.
+If you try to pop an element from an empty stack, Python will raise an `IndexError`. It’s a good practice to check if the stack is not empty before performing a pop operation.
 
 ```python
-stack.append(4)  # Stack is now [1, 2, 4]
+if stack:
+    stack.pop()
+else:
+    print("Stack is empty")
 ```
 
-##### **b. Pop Operation**
-The `pop()` operation removes and returns the top element of the stack.
+##### **Peek (Top Element)**
+The `peek` operation allows you to look at the top element of the stack without removing it. In Python, you can do this by accessing the last element of the list using `stack[-1]`.
 
 ```python
-top_element = stack.pop()  # Removes 4 from the stack, returns 4
+# Peek at the top element without removing it
+top_element = stack[-1]
+
+print(top_element)  # Output: 2
 ```
 
-##### **c. Peek Operation**
-The `peek()` operation returns the top element without removing it. This can be done by accessing the last element in the list.
+If the stack is empty, trying to access `stack[-1]` will raise an `IndexError`. To avoid this, you should check if the stack is not empty before peeking.
 
 ```python
-top_element = stack[-1]  # Returns the top element without removing it
+if stack:
+    top_element = stack[-1]
+    print(top_element)
+else:
+    print("Stack is empty")
 ```
 
-##### **d. Check if Stack is Empty**
-You can check if the stack is empty by checking the length of the stack or directly evaluating it.
+### **Implementing a Stack Class in Python**
+While using a list directly as a stack is simple and effective, you might want to implement a stack as a separate class to encapsulate its behavior and add additional methods.
+
+Here’s a basic implementation of a stack class:
 
 ```python
-is_empty = len(stack) == 0  # Returns True if stack is empty
+class Stack:
+    def __init__(self):
+        self.stack = []
 
-# Or simply:
-is_empty = not stack  # More Pythonic way
-```
+    def is_empty(self):
+        return len(self.stack) == 0
 
-##### **e. Stack Size**
-The size of the stack can be obtained using the `len()` function.
+    def push(self, item):
+        self.stack.append(item)
 
-```python
-size = len(stack)  # Returns the number of elements in the stack
-```
+    def pop(self):
+        if self.is_empty():
+            raise IndexError("Pop from an empty stack")
+        return self.stack.pop()
 
-#### **3. Example: Balanced Parentheses Problem**
+    def peek(self):
+        if self.is_empty():
+            raise IndexError("Peek from an empty stack")
+        return self.stack[-1]
 
-A classic use case of a stack is checking for balanced parentheses in an expression.
-
-```python
-def is_balanced(expression):
-    stack = []
-    for char in expression:
-        if char in "({[":
-            stack.append(char)
-        elif char in ")}]":
-            if not stack:
-                return False
-            top = stack.pop()
-            if (char == ")" and top != "(") or \
-               (char == "}" and top != "{") or \
-               (char == "]" and top != "["):
-                return False
-    return not stack
+    def size(self):
+        return len(self.stack)
 
 # Example usage
-print(is_balanced("((2 + 3) * [5 - 2])"))  # Output: True
-print(is_balanced("((2 + 3] * [5 - 2))"))  # Output: False
+my_stack = Stack()
+my_stack.push(10)
+my_stack.push(20)
+my_stack.push(30)
+
+print("Top element:", my_stack.peek())  # Output: Top element: 30
+print("Stack size:", my_stack.size())   # Output: Stack size: 3
+
+print("Popped element:", my_stack.pop())  # Output: Popped element: 30
+print("Stack after pop:", my_stack.stack) # Output: Stack after pop: [10, 20]
 ```
 
-#### **4. Applications of Stacks**
-- **Expression Evaluation**: Stacks are used in evaluating arithmetic expressions, particularly those in postfix or prefix notation.
-- **Backtracking Algorithms**: In problems like maze solving, stacks are used to backtrack and explore different paths.
-- **Function Call Management**: The system stack keeps track of function calls and returns.
-- **Undo Mechanism in Software**: Stacks are used to store history and allow undo operations in text editors and other software.
+### **Use Cases of Stacks**
+- **Function Call Management**: In many programming languages, including Python, the function call stack is managed using a stack data structure.
+- **Expression Evaluation**: Stacks are used in parsing expressions (e.g., converting infix to postfix expressions) and evaluating them.
+- **Undo Mechanisms**: Applications like text editors use stacks to implement the undo functionality.
+- **Backtracking Algorithms**: Stacks are used in algorithms like Depth-First Search (DFS) where you need to explore all possibilities.
 
 ### **Conclusion**
-
-Stacks are a fundamental data structure with wide-ranging applications in computer science and software development. Understanding how to implement and use stacks is crucial for solving various algorithmic problems.
-
-Would you like to move on to the next data structure, **Queues**?
+Stacks are an essential data structure with many practical applications. They are simple yet powerful, making them a fundamental tool in problem-solving and algorithm design. Understanding how to implement and use stacks effectively can greatly enhance your ability to manage and manipulate data in a LIFO manner.
