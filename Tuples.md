@@ -144,7 +144,3 @@ print(my_dict[('key1', 1)])  # Output: value1
 
 ### **Conclusion**
 Tuples are a fundamental data structure in Python, providing an efficient way to store sequences of immutable data. Their immutability makes them suitable for use in scenarios where the integrity of the data needs to be maintained, such as dictionary keys or returning multiple values from a function. Understanding how to effectively use tuples can help you write more reliable and maintainable Python code.
-
----
-
-Would you like to explore more about tuples or move on to another topic?
