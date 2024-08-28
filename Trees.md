@@ -183,7 +183,3 @@ print(root.level_order_traversal(root))  # Output: [10, 5, 20, 3, 7, 15]
 
 ### **Conclusion**
 Trees are fundamental data structures that are widely used in various applications, from representing hierarchical data to optimizing search and sort operations. Understanding binary trees and binary search trees is essential for solving complex problems efficiently. The operations of insertion, deletion, and traversal are crucial for manipulating and accessing data within trees.
-
----
-
-Shall we move on to the next data structure, **Graphs**?
