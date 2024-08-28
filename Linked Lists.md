@@ -230,7 +230,3 @@ dll.traverse_backward() # Output: 3 -> 2 -> 1 -> None
 
 ### **Conclusion**
 Linked lists are versatile data structures that are fundamental to many algorithms and systems. They provide efficient ways to insert and delete elements without the need for shifting, as in arrays. Understanding both singly and doubly linked lists allows you to choose the right type for your application based on the needs for forward and backward traversal, insertion, and deletion.
-
----
-
-Shall we move on to the next data structure, **Trees**?
